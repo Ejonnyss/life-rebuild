@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chooseMissions,complete,freshState,miss,missions,needsReview,totalXp} from './engine';
+import {chooseMissions,complete,freshState,miss,missions,needsReview,reviewDue,totalXp} from './engine';
 
 test('first visit offers one manageable main mission and at most two alternatives',()=>{const s=freshState();const plan=chooseMissions(s);assert.ok(plan.primary);assert.ok(plan.sides.length<=2);assert.ok(plan.primary!.minutes<=s.minutes)});
 test('low energy and short window exclude demanding missions',()=>{const s={...freshState(),energy:'low' as const,minutes:15};const plan=chooseMissions(s);assert.ok(plan.primary);assert.equal(plan.primary!.energy,'low');assert.ok(plan.primary!.minutes<=15);assert.ok(!plan.sides.some(m=>m.energy!=='low'||m.minutes>15))});
@@ -11,3 +11,4 @@ test('repeated career actions without an interview prompt review',()=>{const s=f
 test('completion adds game experience separately from real action count',()=>{const s=freshState();const m=missions.find(m=>m.id==='career_contact')!;const next=complete(s,m);assert.equal(next.xp.career,m.xp);assert.equal(next.real.contacts,1);assert.equal(next.money.received,0);assert.ok(next.achievements.includes('Первый ход'))});
 test('a reduced preparatory step never invents a sent contact',()=>{const s=freshState();const m=missions.find(m=>m.id==='career_contact')!;s.smallSteps[m.id]=1;const next=complete(s,m);assert.ok(next.xp.career>0);assert.equal(next.real.contacts,0);assert.ok(!next.achievements.includes('Новая дверь'))});
 test('returning after a pause does not remove progress',()=>{const s=freshState();s.returning=true;s.xp.career=42;s.minutes=15;s.energy='low';const plan=chooseMissions(s);assert.equal(plan.primary?.id,'return_step');assert.equal(totalXp(s),42)});
+test('two-week check-in appears once and gives no game reward',()=>{const s=freshState();s.onboarded=true;s.startedAt=new Date(Date.now()-15*86400000).toISOString();assert.equal(reviewDue(s),true);s.review14={start:'Да',finish:'Да',pressure:'Меньше',time:'1–5 минут',return:'Да'};assert.equal(reviewDue(s),false);assert.equal(totalXp(s),0)});

@@ -22,3 +22,11 @@
 .saved-notes dl>div{margin-bottom:10px}
 .saved-notes dt{font-size:.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em}
 .saved-notes dd{margin:3px 0 0;color:#d2ddd5;font-size:.87rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.hint-banner{flex-wrap:wrap}
+.hint-banner button{margin-left:auto;border:1px solid #ddbc84;background:#d8b783;color:#142228;border-radius:7px;padding:8px 13px;font-weight:750;min-height:40px}
+.review-sheet{padding-top:30px}
+.review-sheet h2{font-size:2.25rem;margin-bottom:10px}
+.review-sheet p{color:#b9cbc4}
+.review-sheet label{display:flex;flex-direction:column;gap:8px;padding:12px 0;color:#edf1ea;font-size:.9rem;font-weight:700}
+.review-sheet select{appearance:none;background:#0c1c23;color:#f3f1e7;border:1px solid #54706c;border-radius:8px;padding:12px;font-size:1rem;min-height:48px}
+.review-sheet .button{margin-top:18px}
