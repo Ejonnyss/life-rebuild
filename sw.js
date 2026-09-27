@@ -1,5 +1,5 @@
-const CACHE='life-rebuild-82f9b16a5057';
-const ASSETS=["./","./apple-touch-icon.png","./assets/index--WhyrQxX.css","./assets/index-DBEVl7sc.js","./icon-192.png","./icon-512.png","./icon.svg","./index.html","./manifest.webmanifest"];
+const CACHE='life-rebuild-f5c5438ea66d';
+const ASSETS=["./","./apple-touch-icon.png","./assets/index-B5QCROjw.js","./assets/index-CmhR1opt.css","./icon-192.png","./icon-512.png","./icon.svg","./index.html","./manifest.webmanifest"];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting()});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));self.clients.claim()});
 self.addEventListener('fetch',event=>{if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy))}return response}).catch(()=>caches.match(event.request,{ignoreVary:true}).then(cached=>cached||(event.request.mode==='navigate'?caches.match('./index.html',{ignoreVary:true}):Response.error()))))});
