@@ -1,6 +1,6 @@
 const PREFIX='life-rebuild-'+new URL(self.registration.scope).pathname+'-';
-const CACHE=PREFIX+'30b0afba9530';
-const ASSETS=["./","./OFL-Onest.txt","./apple-touch-icon.png","./assets/Onest-variable-DZuv1oNk.ttf","./assets/action-v32-C-F39Sv6.webp","./assets/backup-DqP-DSs4.js","./assets/city-v32-CHi9ZwHa.webp","./assets/index-B1bXc0nO.css","./assets/index-CGMOu40d.js","./assets/map-v32-CIU3DbCG.webp","./assets/outcome-v32-5rNcZwfn.webp","./assets/stage-v32-CnwGdS3e.webp","./assets/traveler-v32-D3ERStxz.webp","./beta-week.html","./icon-192.png","./icon-512.png","./icon.svg","./index.html","./manifest.webmanifest"];
+const CACHE=PREFIX+'4badd5500642';
+const ASSETS=["./","./OFL-Onest.txt","./apple-touch-icon.png","./assets/Onest-variable-DZuv1oNk.ttf","./assets/action-v32-C-F39Sv6.webp","./assets/backup-DqP-DSs4.js","./assets/city-v32-CHi9ZwHa.webp","./assets/index-B1bXc0nO.css","./assets/index-B1tHQtn8.js","./assets/map-v32-CIU3DbCG.webp","./assets/outcome-v32-5rNcZwfn.webp","./assets/stage-v32-CnwGdS3e.webp","./assets/traveler-v32-D3ERStxz.webp","./beta-week.html","./icon-192.png","./icon-512.png","./icon.svg","./index.html","./manifest.webmanifest"];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting()});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith(PREFIX)&&key!==CACHE).map(key=>caches.delete(key)))));self.clients.claim()});
 async function mediaResponse(request){
